@@ -6,15 +6,23 @@
       </v-icon>
       <h1 class="title">Bem vindo(a)</h1>
       <h2 class="subtitle">Faça login em sua conta</h2>
-      <v-form>
+      <v-form ref="form" v-model="valid" lazy-validation>
         <v-row>
           <v-col cols="12">
-            <v-text-field label="Email" type="email"></v-text-field>
+            <v-text-field
+            label="Email"
+            type="email"
+            v-model="email"
+            :rules="emailRules"></v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-text-field label="Senha" type="password"></v-text-field>
+            <v-text-field
+            label="Senha"
+            type="password"
+            v-model="password"
+            :rules="passwordRules"></v-text-field>
           </v-col>
-          <v-btn block x-large color="primary">
+          <v-btn block x-large color="primary" @click="handleLogin">
             Entrar
           </v-btn>
           <v-btn block x-large class="subtitle mt-4" @click='handleNewAccount'>
@@ -29,9 +37,31 @@
 <script>
 export default {
   name: 'Login',
+  data: () => ({
+    valid: true,
+    email: '',
+    emailRules: [
+      (v) => !!v || 'O email é obrigatório',
+      (v) => /.+@.+\..+/.test(v) || 'Digite um email válido'],
+    password: '',
+    passwordRules: [
+      (v) => !!v || 'A senha é obrigatória',
+    ],
+  }),
   methods: {
     handleNewAccount() {
       this.$router.push('new-account');
+    },
+    handleValidLogin() {
+      return this.email === localStorage.email && this.password === localStorage.password;
+    },
+    handleLogin() {
+      this.$refs.form.validate();
+      if (this.handleValidLogin()) {
+        console.log('Logado');
+      } else {
+        console.log('Email ou senha inválidos');
+      }
     },
   },
 };
