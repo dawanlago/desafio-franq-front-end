@@ -1,0 +1,15 @@
+$background: #F1F1F1;
+$light: #FFFFFF;
+$dark: #333333;
+$dark-text: #696687;
+$blue: #4D61FC;
+$grey: #E5E5E5;
+
+:root {
+    --background: #{$background};
+    --light: #{$light};
+    --dark: #{$dark};
+    --dark-text: #{$dark-text};
+    --blue: #{$blue};
+    --grey: #{$grey};
+};
