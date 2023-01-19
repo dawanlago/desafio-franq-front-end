@@ -2,7 +2,7 @@
   <div id="login" class="container">
     <div class="area-create">
       <v-icon color="#4D61FC" size="30"> mdi-account </v-icon>
-      <h1 class="title">Criação de conta</h1>
+      <Title text="Criação de conta" />
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-row>
           <v-col cols="12">
@@ -58,8 +58,13 @@
 </template>
 
 <script>
+import Title from '../components/Title.vue';
+
 export default {
   name: 'Login',
+  components: {
+    Title,
+  },
   data: () => ({
     valid: true,
     name: '',

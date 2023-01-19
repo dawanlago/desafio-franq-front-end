@@ -4,6 +4,7 @@ $dark: #333333;
 $dark-text: #696687;
 $blue: #4D61FC;
 $grey: #E5E5E5;
+$all-font-family: 'Ubuntu';
 
 :root {
     --background: #{$background};
@@ -12,4 +13,5 @@ $grey: #E5E5E5;
     --dark-text: #{$dark-text};
     --blue: #{$blue};
     --grey: #{$grey};
+    --all-font-family: $all-font-family;
 };

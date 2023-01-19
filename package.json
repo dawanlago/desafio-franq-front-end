@@ -50,7 +50,8 @@
     "rules": {
       "vue/multi-word-component-names": "off",
       "vue/no-mutating-props": "off",
-      "object-curly-newline": "off"
+      "object-curly-newline": "off",
+      "vue/no-unused-components": "off"
     }
   },
   "browserslist": [

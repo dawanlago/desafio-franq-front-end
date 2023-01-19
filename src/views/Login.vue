@@ -4,8 +4,8 @@
       <v-icon color="#4D61FC" size="30">
         mdi-login-variant
       </v-icon>
-      <h1 class="title">Bem vindo(a)</h1>
-      <h2 class="subtitle">Faça login em sua conta</h2>
+      <Title text="Bem vindo(a)" />
+      <Subtitle text="Faça login em sua conta" />
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-row>
           <v-col cols="12">
@@ -35,8 +35,15 @@
 </template>
 
 <script>
+import Title from '../components/Title.vue';
+import Subtitle from '../components/Subtitle.vue';
+
 export default {
   name: 'Login',
+  components: {
+    Title,
+    Subtitle,
+  },
   data: () => ({
     valid: true,
     email: '',
