@@ -65,6 +65,7 @@ export default {
     handleLogin() {
       this.$refs.form.validate();
       if (this.handleValidLogin()) {
+        localStorage.timerLogin = Date.now();
         this.$router.push('/');
       } else {
         console.log('Email ou senha inválidos');

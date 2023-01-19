@@ -10,10 +10,16 @@
 
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  }),
+  methods: {
+    // Tratando o tempo de sessão do usuário: 60s
+    handleGetSessionUser() {
+      return (Date.now() - localStorage.timerLogin) / 1000 < 60;
+    },
+  },
+  mounted() {
+    // Verificando se o usuário está em tempo de sessão
+    this.$router.push({ name: this.handleGetSessionUser() ? 'home' : 'login' });
+  },
 };
 </script>
 
