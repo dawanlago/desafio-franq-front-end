@@ -10,31 +10,21 @@
             </v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-text-field
-              label="Email"
-              type="email"
-              v-model="email"
-              :rules="emailRules"
-              required>
+            <v-text-field label="Email" type="email" v-model="email" :rules="emailRules" required>
             </v-text-field>
           </v-col>
           <v-col cols="12">
             <v-text-field
-              label="Senha"
-              type="password"
-              v-model="password"
-              :rules="passwordRules"
-              required>
-            </v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-            label="Repita a sua senha"
+            label="Senha"
             type="password"
-            v-model="passwordRepeat"
-            :rules="passwordRepeatRules"
-            requided
-            >
+            v-model="password"
+            :rules="passwordRules"
+            required>
+            </v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field label="Repita a sua senha" type="password" v-model="passwordRepeat"
+              :rules="passwordRepeatRules" requided>
             </v-text-field>
           </v-col>
           <v-btn block x-large color="primary" class="subtitle" @click="handleNewAccount">
@@ -96,7 +86,7 @@ export default {
     handleNewAccount() {
       this.$refs.form.validate();
       const { name, email, password, passwordRepeat } = this;
-      if (password !== passwordRepeat) {
+      if (password !== passwordRepeat && password === '') {
         this.text = 'As senhas não coincidem';
         this.snackbar = true;
         return;
@@ -104,6 +94,8 @@ export default {
       localStorage.name = name;
       localStorage.email = email;
       localStorage.password = password;
+
+      this.handleLogin();
     },
   },
 };

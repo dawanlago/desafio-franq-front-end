@@ -65,7 +65,7 @@ export default {
     handleLogin() {
       this.$refs.form.validate();
       if (this.handleValidLogin()) {
-        console.log('Logado');
+        this.$router.push('/');
       } else {
         console.log('Email ou senha inválidos');
       }
