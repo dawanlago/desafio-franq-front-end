@@ -1,24 +1,19 @@
 # desafio-franq-front-end
 
-## Project setup
+## Após fazer o clone do projeto rodar o comando abaixo:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Para compilação e execução de desenvolvimento rodar o comando abaixo:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Bibliotecas usadas
 ```
-npm run build
+axios: Usada para requisições da API
+vue-router: Usada para controle de rotas
+vuetify: Usada para estilização
+vuex: Usada para controle de estado
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
