@@ -12,71 +12,9 @@
       </v-col>
     </div>
     <v-container>
-      <div class="container-items">
-        <h3>Moedas</h3>
-        <v-row no-gutters>
-          <v-col
-            cols="12"
-            xs="12"
-            sm="6"
-            md="3"
-            class="card-container"
-            v-for="currency, index in currencies" :key="index"
-          >
-            <v-card class="card" outlined tile>
-              <p
-                class="variationPositive"
-                :class="{ 'variationNegative' : currency.variation <= 0} ">{{ currency.variation }}%
-              </p>
-              <h4 class="price">R${{ currency.buy }}</h4>
-              <p class="name">{{ currency.name }}</p>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-
-      <div class="container-items">
-        <h3>Ações</h3>
-        <v-row no-gutters>
-          <v-col
-          cols="12"
-            xs="12"
-            sm="6"
-            md="3"
-            class="card-container"
-            v-for="stock, index in stocks" :key="index"
-          >
-            <v-card class="card" outlined tile>
-              <p class="variationPositive" :class="{ 'variationNegative' : stock.variation <= 0} ">
-                {{ stock.variation }}%
-              </p>
-              <p class="nameStock">{{ stock.name }}</p>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-
-      <div class="container-items">
-        <h3>Bitcoin</h3>
-        <v-row no-gutters>
-          <v-col
-            cols="12"
-            xs="12"
-            sm="6"
-            md="3"
-            class="card-container"
-            v-for="coin, index in bitcoin" :key="index"
-          >
-            <v-card class="card" outlined tile>
-              <p class="variationPositive" :class="{ 'variationNegative' : coin.variation <= 0} ">
-                {{ coin.variation }}%
-              </p>
-              <h4 class="price">R${{ coin.buy }}</h4>
-              <p class="name">{{ coin.name }}</p>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
+      <CardCurrency :currencies="currencies"/>
+      <CardStock :stocks="stocks"/>
+      <CardBitcoin :bitcoin="bitcoin"/>
     </v-container>
 
   </div>
@@ -84,6 +22,9 @@
 
 <script>
 import Title from '@/components/Title.vue';
+import CardCurrency from '@/components/CardCurrency.vue';
+import CardStock from '@/components/CardStock.vue';
+import CardBitcoin from '@/components/CardBitcoin.vue';
 import api from '@/services/api';
 
 export default {
@@ -96,6 +37,9 @@ export default {
   }),
   components: {
     Title,
+    CardCurrency,
+    CardStock,
+    CardBitcoin,
   },
   methods: {
     handleCurrencies(currenciesObject) {
@@ -128,15 +72,24 @@ export default {
     handleLogin() {
       this.$router.push('/login');
     },
+    handleDetails(item) {
+      // Setando o nome do item na state
+      this.$store.commit('setNameItem', item);
+      this.$router.push('/details');
+    },
   },
   async mounted() {
+    this.$root.$emit('Spinner::show');
     await api().get().then((res) => {
       this.handleCurrencies(res.data.results.currencies);
       this.handleStocks(res.data.results.stocks);
       this.handleBitcoin(res.data.results.bitcoin);
     });
     // Setando o nome do usuário na state
-    this.$store.commit('setNomeUser', localStorage.name);
+    this.$store.commit('setNameUser', localStorage.name);
+    setTimeout(() => {
+      this.$root.$emit('Spinner::hide');
+    }, 300);
   },
 };
 </script>
@@ -227,6 +180,6 @@ export default {
 @media screen and (max-width: 600px) {
   .card {
     width: 100%;
-}
+  }
 }
 </style>

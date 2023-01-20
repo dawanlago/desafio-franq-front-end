@@ -6,11 +6,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     nameUser: '',
+    nameItem: '',
   },
   mutations: {
-    setNomeUser(state, nameUser) {
+    setNameUser(state, nameUser) {
       if (nameUser) {
         state.nameUser = nameUser;
+      }
+    },
+    setNameItem(state, nameItem) {
+      if (nameItem) {
+        state.nameItem = nameItem;
       }
     },
   },
