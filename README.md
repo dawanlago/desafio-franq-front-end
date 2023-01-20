@@ -1,7 +1,7 @@
 # desafio-franq-front-end
 
 ### Link do sistema em produção
-https://desafio-franq-dawan.netlify.app
+https://franq-desafio-dawan.herokuapp.com/
 
 ### Após fazer o clone do projeto rodar o comando abaixo:
 ```
