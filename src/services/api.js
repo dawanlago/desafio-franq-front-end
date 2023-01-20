@@ -5,9 +5,6 @@ const api = () => {
   const axiosInstance = axios.create({
     baseURL: `https://api.hgbrasil.com/finance?format=json-cors&key=${KEY}`,
     withCredentials: false,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
   });
 
   return axiosInstance;
