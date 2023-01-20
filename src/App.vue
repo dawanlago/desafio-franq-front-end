@@ -18,7 +18,7 @@ export default {
   methods: {
     // Tratando o tempo de sessão do usuário: 60s
     handleGetSessionUser() {
-      return (Date.now() - localStorage.timerLogin) / 1000 < 60;
+      return (Date.now() - localStorage.timerLogin) / 1000 < 10;
     },
   },
   mounted() {
