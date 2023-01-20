@@ -5,13 +5,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-  },
-  getters: {
+    nameUser: '',
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    setNomeUser(state, nameUser) {
+      if (nameUser) {
+        state.nameUser = nameUser;
+      }
+    },
   },
 });

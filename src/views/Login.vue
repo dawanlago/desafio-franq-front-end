@@ -82,6 +82,7 @@ export default {
         this.snackbar = true;
         return;
       }
+      // Considerando a data/hora atual para validar sessão
       localStorage.timerLogin = Date.now();
       this.$router.push('/');
     },

@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="container-logout">
+      <h4 class="name-user">Olá, {{ $store.state.nameUser }}!</h4>
       <button class="logout" @click="handleLogin">
         Sair <v-icon color="#333333">mdi-logout-variant</v-icon>
       </button>
@@ -134,6 +135,8 @@ export default {
       this.handleStocks(res.data.results.stocks);
       this.handleBitcoin(res.data.results.bitcoin);
     });
+    // Setando o nome do usuário na state
+    this.$store.commit('setNomeUser', localStorage.name);
   },
 };
 </script>
@@ -148,7 +151,13 @@ export default {
 }
 .container-logout {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.name-user {
+  font-size: 18px;
+  color: var(--dark);
 }
 .logout {
   font-family: 'Ubuntu', sans-serif !important;
@@ -162,8 +171,8 @@ export default {
   justify-content: center;
 }
 .card {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   background-color: var(--light);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border: none;
