@@ -15,5 +15,6 @@ export default {
   font-size: 18px !important;
   color: var(--dark-text);
   margin: 0;
+  text-align: center;
 }
 </style>

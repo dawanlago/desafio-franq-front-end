@@ -75,7 +75,6 @@ export default {
     passwordRepeatRules: [
       (v) => !!v || 'A repitição da senha é obrigatória',
     ],
-    error: '',
     snackbar: false,
     text: '',
   }),
@@ -83,10 +82,28 @@ export default {
     handleLogin() {
       this.$router.push('/login');
     },
-    handleNewAccount() {
-      this.$refs.form.validate();
+    // Validando se os campos estão preenchidos
+    handleValidNewAccount() {
       const { name, email, password, passwordRepeat } = this;
-      if (password !== passwordRepeat && password === '') {
+      return name !== '' && email !== '' && password !== '' && passwordRepeat !== '';
+    },
+    // Validando se as senhas correspondem
+    handleValidMatchPassword() {
+      const { password, passwordRepeat } = this;
+      return password === passwordRepeat;
+    },
+    handleNewAccount() {
+      const { name, email, password } = this;
+      // Validação para as regras definidas por campos
+      if (!this.$refs.form.validate()) return;
+      // Chamando validação de preenchimento dos campos por segurança
+      if (!this.handleValidNewAccount()) {
+        this.text = 'É necessário preencher todos os campos';
+        this.snackbar = true;
+        return;
+      }
+      // Chamando validação de correspondência dos campos por segurança
+      if (!this.handleValidMatchPassword()) {
         this.text = 'As senhas não coincidem';
         this.snackbar = true;
         return;

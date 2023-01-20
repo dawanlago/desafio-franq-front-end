@@ -28,6 +28,14 @@
           <v-btn block x-large class="subtitle mt-4" @click='handleNewAccount'>
             Criar conta
           </v-btn>
+          <v-snackbar v-model="snackbar">
+            {{ text }}
+            <template v-slot:action="{ attrs }">
+              <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+                <v-icon> mdi-close-circle-outline </v-icon>
+              </v-btn>
+            </template>
+          </v-snackbar>
         </v-row>
       </v-form>
     </div>
@@ -54,6 +62,8 @@ export default {
     passwordRules: [
       (v) => !!v || 'A senha é obrigatória',
     ],
+    snackbar: false,
+    text: '',
   }),
   methods: {
     handleNewAccount() {
@@ -63,13 +73,17 @@ export default {
       return this.email === localStorage.email && this.password === localStorage.password;
     },
     handleLogin() {
-      this.$refs.form.validate();
-      if (this.handleValidLogin()) {
-        localStorage.timerLogin = Date.now();
-        this.$router.push('/');
-      } else {
-        console.log('Email ou senha inválidos');
+      // Validação para as regras definidas por campos
+      if (!this.$refs.form.validate()) return;
+
+      // Chamando validação de email e senha
+      if (!this.handleValidLogin()) {
+        this.text = 'Email ou senha inválidos';
+        this.snackbar = true;
+        return;
       }
+      localStorage.timerLogin = Date.now();
+      this.$router.push('/');
     },
   },
 };
@@ -92,5 +106,13 @@ export default {
   width: 500px;
   padding: 40px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .area-login {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
 }
 </style>

@@ -6,18 +6,22 @@
       </button>
     </div>
     <div class="row header">
-      <v-col cols="4">
+      <v-col cols="12">
         <Title text="Cotações" />
-      </v-col>
-      <v-col cols="6">
-        <v-text-field label="Pesquisar item" type="text"></v-text-field>
       </v-col>
     </div>
     <v-container>
       <div class="container-items">
         <h3>Moedas</h3>
         <v-row no-gutters>
-          <v-col v-for="currency, index in currencies" :key="index">
+          <v-col
+            cols="12"
+            xs="12"
+            sm="6"
+            md="3"
+            class="card-container"
+            v-for="currency, index in currencies" :key="index"
+          >
             <v-card class="card" outlined tile>
               <p
                 class="variationPositive"
@@ -33,7 +37,14 @@
       <div class="container-items">
         <h3>Ações</h3>
         <v-row no-gutters>
-          <v-col v-for="stock, index in stocks" :key="index">
+          <v-col
+          cols="12"
+            xs="12"
+            sm="6"
+            md="3"
+            class="card-container"
+            v-for="stock, index in stocks" :key="index"
+          >
             <v-card class="card" outlined tile>
               <p class="variationPositive" :class="{ 'variationNegative' : stock.variation <= 0} ">
                 {{ stock.variation }}%
@@ -47,7 +58,14 @@
       <div class="container-items">
         <h3>Bitcoin</h3>
         <v-row no-gutters>
-          <v-col v-for="coin, index in bitcoin" :key="index">
+          <v-col
+            cols="12"
+            xs="12"
+            sm="6"
+            md="3"
+            class="card-container"
+            v-for="coin, index in bitcoin" :key="index"
+          >
             <v-card class="card" outlined tile>
               <p class="variationPositive" :class="{ 'variationNegative' : coin.variation <= 0} ">
                 {{ coin.variation }}%
@@ -139,6 +157,10 @@ export default {
   color: var(--dark);
   margin-right: 10px;
 }
+.card-container {
+  display: flex;
+  justify-content: center;
+}
 .card {
   width: 150px;
   height: 150px;
@@ -151,6 +173,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  margin-top: 10px;
 }
 .variationPositive {
   font-family: 'Ubuntu', sans-serif !important;
@@ -187,7 +210,14 @@ export default {
 .container-items {
   margin: 30px 0;
 }
+
 .container-items h3 {
     margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 100%;
+}
 }
 </style>
